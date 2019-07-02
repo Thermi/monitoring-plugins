@@ -325,7 +325,7 @@ int get_hardware_address(int sock, char* interface_name)
     memcpy(&client_hardware_address[0], &ifr.ifr_hwaddr.sa_data, 6);
 
 #elif defined(__bsd__)
-    /* King 2004	see ACKNOWLEDGEMENTS */
+    /* King 2004 see ACKNOWLEDGEMENTS */
 
     int mib[6], len;
     char* buf;
@@ -374,7 +374,7 @@ int get_hardware_address(int sock, char* interface_name)
 
 #elif defined(__sun__) || defined(__solaris__)
 
-    /* Kompf 2000-2003	see ACKNOWLEDGEMENTS */
+    /* Kompf 2000-2003 see ACKNOWLEDGEMENTS */
     long stat;
     char dev[20] = "/dev/";
     char* p;
@@ -773,7 +773,7 @@ int create_dhcp_socket(void)
 {
     struct sockaddr_in myname;
     struct ifreq interface;
-    int sock;
+    int sock, err;
     int flag = 1;
 
     /* Set up the address we're going to bind to. */
@@ -814,10 +814,13 @@ int create_dhcp_socket(void)
 #if defined(__linux__)
     strncpy(interface.ifr_ifrn.ifrn_name, network_interface_name, IFNAMSIZ - 1);
     interface.ifr_ifrn.ifrn_name[IFNAMSIZ - 1] = '\0';
-    if (setsockopt(sock, SOL_SOCKET, SO_BINDTODEVICE, (char*)&interface, sizeof(interface)) < 0)
+    err = setsockopt(sock, SOL_SOCKET, SO_BINDTODEVICE, (char*)&interface, sizeof(interface));
+    if (err)
     {
-        printf(_("Error: Could not bind socket to interface %s.  Check your privileges...\n"),
-            network_interface_name);
+        printf(_("Error: Could not bind socket to interface %s: %s\n"),
+            network_interface_name,
+            strerror(err)
+        );
         exit(STATE_UNKNOWN);
     }
 
@@ -827,10 +830,12 @@ int create_dhcp_socket(void)
 #endif
 
     /* bind the socket */
-    if (bind(sock, (struct sockaddr*)&myname, sizeof(myname)) < 0)
+    err = bind(sock, (struct sockaddr*)&myname, sizeof(myname));
+    if (err)
     {
-        printf(_("Error: Could not bind to DHCP socket (port %d)!  Check your privileges...\n"),
-            DHCP_CLIENT_PORT);
+        printf(_("Error: Could not bind to DHCP socket (port %d)!; %s\n"),
+            DHCP_CLIENT_PORT,
+            strerror(err));
         exit(STATE_UNKNOWN);
     }
 
@@ -1248,7 +1253,7 @@ int validate_arguments(int argc, int arg_index)
 
 
 #if defined(__sun__) || defined(__solaris__) || defined(__hpux__)
-/* Kompf 2000-2003	see ACKNOWLEDGEMENTS */
+/* Kompf 2000-2003  see ACKNOWLEDGEMENTS */
 
 /* get a message from a stream; return type of message */
 static int get_msg(int fd)
