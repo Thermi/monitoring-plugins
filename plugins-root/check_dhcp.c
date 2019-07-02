@@ -780,7 +780,7 @@ int create_dhcp_socket(void)
     bzero(&myname, sizeof(myname));
     myname.sin_family = AF_INET;
     /* listen to DHCP client port if we're in unicast mode */
-    myname.sin_port = htons(unicast ? DHCP_SERVER_PORT : DHCP_CLIENT_PORT);
+    myname.sin_port = htons(unicast ? DHCP_CLIENT_PORT : 0);
     myname.sin_addr.s_addr = unicast ? my_ip.s_addr : INADDR_ANY;
     bzero(&myname.sin_zero, sizeof(myname.sin_zero));
 
