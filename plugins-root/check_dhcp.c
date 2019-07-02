@@ -1360,7 +1360,7 @@ void print_help(void){
 
 	printf("%s\n", _("This plugin tests the availability of DHCP servers on a network."));
 
-  printf ("\n\n");
+	printf ("\n\n");
 
 	print_usage();
 
@@ -1370,19 +1370,19 @@ void print_help(void){
 	printf (UT_VERBOSE);
 
 	printf (" %s\n", "-s, --serverip=IPADDRESS");
-  printf ("    %s\n", _("IP address of DHCP server that we must hear from"));
-  printf (" %s\n", "-r, --requestedip=IPADDRESS");
-  printf ("    %s\n", _("IP address that should be offered by at least one DHCP server"));
-  printf (" %s\n", "-t, --timeout=INTEGER");
-  printf ("    %s\n", _("Seconds to wait for DHCPOFFER before timeout occurs"));
-  printf (" %s\n", "-i, --interface=STRING");
-  printf ("    %s\n", _("Interface to to use for listening (i.e. eth0)"));
-  printf (" %s\n", "-m, --mac=STRING");
-  printf ("    %s\n", _("MAC address to use in the DHCP request"));
-  printf (" %s\n", "-u, --unicast");
-  printf ("    %s\n", _("Unicast testing: mimic a DHCP relay, requires -s"));
-
-  printf (UT_SUPPORT);
+	printf ("    %s\n", _("IP address of DHCP server that we must hear from"));
+	printf (" %s\n", "-r, --requestedip=IPADDRESS");
+	printf ("    %s\n", _("IP address that should be offered by at least one DHCP server"));
+	printf (" %s\n", "-t, --timeout=INTEGER");
+	printf ("    %s\n", _("Seconds to wait for DHCPOFFER before timeout occurs"));
+	printf (" %s\n", "-i, --interface=STRING");
+	printf ("    %s\n", _("Interface to to use for listening (i.e. eth0)"));
+	printf (" %s\n", "-m, --mac=STRING");
+	printf ("    %s\n", _("MAC address to use in the DHCP request"));
+	printf (" %s\n", "-u, --unicast");
+	printf ("    %s\n", _("Unicast testing: mimic a DHCP relay, requires -s"));
+	
+	printf (UT_SUPPORT);
 	return;
 	}
 
@@ -1390,9 +1390,9 @@ void print_help(void){
 void
 print_usage(void){
 
-  printf ("%s\n", _("Usage:"));
-  printf (" %s [-v] [-u] [-s serverip] [-r requestedip] [-t timeout]\n",progname);
-  printf ("                  [-i interface] [-m mac]\n");
+	printf ("%s\n", _("Usage:"));
+	printf (" %s [-v] [-u] [-s serverip] [-r requestedip] [-t timeout]\n",progname);
+	printf ("                  [-i interface] [-m mac]\n");
 
 	return;
 	}
